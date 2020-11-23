@@ -18,6 +18,7 @@ determine_config_home_path() {
 
 setup_kubectl() {
   cat $BASE_DIR/kube.setup >> $THIS_CONFIG_HOME/.bashrc
+  source $THIS_CONFIG_HOME/.bashrc
 }
 
 setup_krew() {
