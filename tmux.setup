@@ -1,0 +1,59 @@
+###############
+# TMUX CONFIG #
+###############
+
+## Set default terminal
+set -ga terminal-overrides ',xterm-256color:Tc'
+set -g default-terminal "screen-256color"
+
+## Make TMUX source .bashrc
+set-option -g default-shell "/bin/bash"
+
+## New prefix and make it sendable to other apps aswell
+set -g prefix C-a
+bind C-a send-prefix
+unbind C-b
+
+## Setting the delay between prefix and command
+set -s escape-time 1
+
+## Setting base indices for easier navigation
+set -g base-index 1
+set -g pane-base-index 1
+
+## Reloading config
+bind r source-file ~/.tmux.conf \; display "Reloaded config!"
+
+## Enable vi keys
+setw -g mode-keys vi
+#bind Escape copy-mode-vi
+#bind-key -T copy-mode-vi 'v' send -X begin-selection
+
+## Prefix p to paste the buffer
+unbind p
+bind p paste-buffer
+
+## Synchronize panes toggle
+bind C-s set-window-option synchronize-panes
+
+## Split pane and stay in current WD
+bind - split-window -v -c "#{pane_current_path}"
+bind | split-window -h -c "#{pane_current_path}"
+
+## Split pane and go ~
+bind _ split-window -v
+bind \ split-window -h
+
+# Resize the current pane using Alt + direction
+bind -n M-k resize-pane -U 5
+bind -n M-j resize-pane -D 5
+bind -n M-h resize-pane -L 5
+bind -n M-l resize-pane -R 5
+
+## Plugins
+set -g @plugin 'tmux-plugins/tpm'
+set -g @plugin 'christoomey/vim-tmux-navigator'
+set -g @plugin 'tmux-plugins/tmux-resurrect'
+
+# Initialize TMUX plugin manager (keep this line at the very bottom of tmux.conf)
+run -b '~/.tmux/plugins/tpm/tpm'
