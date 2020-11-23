@@ -44,11 +44,17 @@ bind | split-window -h -c "#{pane_current_path}"
 bind _ split-window -v
 bind \ split-window -h
 
-# Resize the current pane using Alt + direction
+## Resize the current pane using Alt + direction
 bind -n M-k resize-pane -U 5
 bind -n M-j resize-pane -D 5
 bind -n M-h resize-pane -L 5
 bind -n M-l resize-pane -R 5
+
+## Navigation fall-back if plugins can't be installed
+bind h select-pane -L
+bind j select-pane -D
+bind k select-pane -U
+bind l select-pane -R 
 
 ## Plugins
 set -g @plugin 'tmux-plugins/tpm'
