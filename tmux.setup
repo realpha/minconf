@@ -50,16 +50,8 @@ bind -n M-j resize-pane -D 5
 bind -n M-h resize-pane -L 5
 bind -n M-l resize-pane -R 5
 
-## Navigation fall-back if plugins can't be installed
+## Navigation fallback 
 bind h select-pane -L
 bind j select-pane -D
 bind k select-pane -U
 bind l select-pane -R 
-
-## Plugins
-set -g @plugin 'tmux-plugins/tpm'
-set -g @plugin 'christoomey/vim-tmux-navigator'
-set -g @plugin 'tmux-plugins/tmux-resurrect'
-
-# Initialize TMUX plugin manager (keep this line at the very bottom of tmux.conf)
-run -b '~/.tmux/plugins/tpm/tpm'
