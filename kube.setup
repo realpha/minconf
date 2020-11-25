@@ -1,4 +1,12 @@
+k-get-name() {
+  local NAME=$1
+  kubectl get pods --no-headers | grep -i -m 1 $NAME | awk '{print $1}'
+}
 source <(kubectl completion bash)
 alias k=kubectl
+alias kname=k-get-name
+alias kcd='kubectl create --dry-run=client -o yaml'
+alias kx='kubectl explain'
+alias kd='kubectl describe'
 complete -F __start_kubectl k
 export PATH="${KREW_ROOT:-$HOME/.krew}/bin:$PATH"
